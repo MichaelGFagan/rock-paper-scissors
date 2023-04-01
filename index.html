@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function getComputerChoice() {
+        let choices = ['Rock', 'Paper', 'Scissors'];
+        let choice_index = Math.floor(Math.random() * choices.length)
+        return choices[choice_index]
+    }
+    function userInput() {
+        let user_choice = prompt('Choose rock, paper, or scissors.').toLowerCase()
+        if (user_choice === 'rock') {
+            return 'Rock'
+        }
+        else if (user_choice == 'paper') {
+            return 'Paper'
+        }
+        else if (user_choice = 'scissors') {
+            return 'Scissors'
+        }
+    }
+    function playRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+            return 0
+        }
+        if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
+            (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+            (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+            return 1
+        }
+        else {
+            return -1
+        }
+    }
+    function game() {
+        let playerWins = 0;
+        let computerWins = 0;
+        while (Math.max(playerWins, computerWins) < 4) {
+            computerWinsAdjusted = -1 * computerWins
+            if (playerWins === 3) {
+                return 'Player wins ' + playerWins.toString() + ' games to ' + computerWinsAdjusted.toString() + '!'
+            }
+            else if (computerWinsAdjusted === 3) {
+                return 'Computer wins ' + computerWinsAdjusted.toString() + ' games to ' + playerWins.toString() + '!'
+            }
+            else {
+                console.log('Player: ' + playerWins.toString() + ' | Computer: ' + computerWinsAdjusted.toString())
+            }
+            let playerSelection = userInput()
+            let computerSelection = getComputerChoice()
+            roundResult = playRound(playerSelection, computerSelection)
+            if (roundResult === 0) {
+                console.log('Round was a draw!')
+            }
+            else if (roundResult === 1) {
+                playerWins += roundResult
+                console.log('Player wins round! ' + playerSelection + ' beats ' + computerSelection + '!')
+            }
+            else if (roundResult === -1) {
+                computerWins += roundResult
+                console.log('Computer wins round! ' + computerSelection + ' beats ' + playerSelection + '!')
+            }
+            
+        }
+    }
+    console.log(game())
+</script>
+</body>
+</html>
